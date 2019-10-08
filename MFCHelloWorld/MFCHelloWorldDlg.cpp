@@ -59,12 +59,14 @@ CMFCHelloWorldDlg::CMFCHelloWorldDlg(CWnd* pParent /*=nullptr*/)
 void CMFCHelloWorldDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, ID_STATIC_TEXT, m_staticText);
 }
 
 BEGIN_MESSAGE_MAP(CMFCHelloWorldDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(ID_BUTTON_CHANGETEXT, &CMFCHelloWorldDlg::OnBnClickedButtonChangeText)
 END_MESSAGE_MAP()
 
 
@@ -153,3 +155,9 @@ HCURSOR CMFCHelloWorldDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+void CMFCHelloWorldDlg::OnBnClickedButtonChangeText()
+{
+	m_staticText.SetWindowTextW(L"New text set by button");
+}
