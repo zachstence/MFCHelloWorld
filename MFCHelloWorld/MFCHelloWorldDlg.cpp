@@ -7,11 +7,11 @@
 #include "MFCHelloWorld.h"
 #include "MFCHelloWorldDlg.h"
 #include "afxdialogex.h"
+#include <string>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
-
 
 // CAboutDlg dialog used for App About
 
@@ -159,5 +159,16 @@ HCURSOR CMFCHelloWorldDlg::OnQueryDragIcon()
 
 void CMFCHelloWorldDlg::OnBnClickedButtonChangeText()
 {
-	m_staticText.SetWindowTextW(L"New text set by button");
+	// Get old string
+	CString oldString;
+	m_staticText.GetWindowTextW(oldString);
+
+	// Convert string to value and increment
+	int val = _wtoi(oldString);
+	val += 1;
+
+	// Set text to new value
+	CString newString;
+	newString.Format(L"%d", val);
+	m_staticText.SetWindowTextW(newString);
 }
