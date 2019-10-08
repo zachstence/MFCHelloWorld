@@ -59,14 +59,14 @@ CMFCHelloWorldDlg::CMFCHelloWorldDlg(CWnd* pParent /*=nullptr*/)
 void CMFCHelloWorldDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, ID_STATIC_TEXT, m_staticText);
+	DDX_Control(pDX, ID_STATIC_RESULT, m_result);
 }
 
 BEGIN_MESSAGE_MAP(CMFCHelloWorldDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(ID_BUTTON_CHANGETEXT, &CMFCHelloWorldDlg::OnBnClickedButtonChangeText)
+	ON_COMMAND_RANGE(ID_BUTTON_0, ID_BUTTON_9, &CMFCHelloWorldDlg::OnBnClickedCalculatorButton)
 END_MESSAGE_MAP()
 
 
@@ -155,20 +155,26 @@ HCURSOR CMFCHelloWorldDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+int ButtonIdToInt(UINT nID) {
+	switch (nID) {
+	case ID_BUTTON_0: return 0;
+	case ID_BUTTON_1: return 1;
+	case ID_BUTTON_2: return 2;
+	case ID_BUTTON_3: return 3;
+	case ID_BUTTON_4: return 4;
+	case ID_BUTTON_5: return 5;
+	case ID_BUTTON_6: return 6;
+	case ID_BUTTON_7: return 7;
+	case ID_BUTTON_8: return 8;
+	case ID_BUTTON_9: return 9;
+	default: return 0;
+	}
+}
 
-
-void CMFCHelloWorldDlg::OnBnClickedButtonChangeText()
+void CMFCHelloWorldDlg::OnBnClickedCalculatorButton(UINT nID)
 {
-	// Get old string
-	CString oldString;
-	m_staticText.GetWindowTextW(oldString);
-
-	// Convert string to value and increment
-	int val = _wtoi(oldString);
-	val += 1;
-
-	// Set text to new value
-	CString newString;
-	newString.Format(L"%d", val);
-	m_staticText.SetWindowTextW(newString);
+	int val = ButtonIdToInt(nID);
+	CString str;
+	str.Format(L"%d", val);
+	m_result.SetWindowTextW(str);
 }

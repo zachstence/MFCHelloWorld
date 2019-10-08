@@ -32,6 +32,6 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
-	CStatic m_staticText;
-	afx_msg void OnBnClickedButtonChangeText();
+	afx_msg void OnBnClickedCalculatorButton(UINT nID);
+	CStatic m_result;
 };
